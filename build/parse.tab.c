@@ -93,6 +93,8 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
+    void yyerror(char *s);
+    int yylex();
 
 
 /* Enabling traces.  */
@@ -126,7 +128,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 130 "parse.tab.c"
+#line 132 "parse.tab.c"
 
 #ifdef short
 # undef short
@@ -412,8 +414,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    10,    10,    11,    14,    15,    16,    19,    20,    21,
-      24,    25
+       0,    12,    12,    13,    16,    17,    18,    21,    22,    23,
+      26,    27
 };
 #endif
 
@@ -1317,38 +1319,38 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 11 "../src/parse.y"
+#line 13 "../src/parse.y"
     {printf(" = %d\n", (yyvsp[(2) - (3)]));;}
     break;
 
   case 5:
-#line 15 "../src/parse.y"
+#line 17 "../src/parse.y"
     {(yyval) = (yyvsp[(1) - (3)]) + (yyvsp[(3) - (3)]);;}
     break;
 
   case 6:
-#line 16 "../src/parse.y"
+#line 18 "../src/parse.y"
     {(yyval) = (yyvsp[(1) - (3)]) - (yyvsp[(3) - (3)]);;}
     break;
 
   case 8:
-#line 20 "../src/parse.y"
+#line 22 "../src/parse.y"
     {(yyval) = (yyvsp[(1) - (3)]) * (yyvsp[(3) - (3)]);;}
     break;
 
   case 9:
-#line 21 "../src/parse.y"
+#line 23 "../src/parse.y"
     {(yyval) = (yyvsp[(1) - (3)]) / (yyvsp[(3) - (3)]);;}
     break;
 
   case 11:
-#line 25 "../src/parse.y"
+#line 27 "../src/parse.y"
     {(yyval) = (yyvsp[(2) - (2)]) >= 0? (yyvsp[(2) - (2)]) : - (yyvsp[(2) - (2)]);;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1352 "parse.tab.c"
+#line 1354 "parse.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1562,7 +1564,7 @@ yyreturn:
 }
 
 
-#line 27 "../src/parse.y"
+#line 29 "../src/parse.y"
 
 
 int main(int argc, char **argv){

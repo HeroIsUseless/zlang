@@ -2,6 +2,8 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
+    void yyerror(char *s);
+    int yylex();
 %}
 %token NUMBER
 %token ADD SUB MUL DIV ABS
