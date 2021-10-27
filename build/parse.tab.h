@@ -40,28 +40,42 @@
       know about them.  */
    enum yytokentype {
      NUMBER = 258,
-     ADD = 259,
-     SUB = 260,
-     MUL = 261,
-     DIV = 262,
-     ABS = 263,
-     EOL = 264
+     INTEGER = 259,
+     ADD = 260,
+     SUB = 261,
+     MUL = 262,
+     DIV = 263,
+     ABS = 264,
+     VAR = 265,
+     EOL = 266
    };
 #endif
 /* Tokens.  */
 #define NUMBER 258
-#define ADD 259
-#define SUB 260
-#define MUL 261
-#define DIV 262
-#define ABS 263
-#define EOL 264
+#define INTEGER 259
+#define ADD 260
+#define SUB 261
+#define MUL 262
+#define DIV 263
+#define ABS 264
+#define VAR 265
+#define EOL 266
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 10 "../src/parse.y"
+{
+    int i;
+    char* s;
+    char c;
+    double f;
+}
+/* Line 1529 of yacc.c.  */
+#line 78 "parse.tab.h"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

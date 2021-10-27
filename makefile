@@ -1,6 +1,6 @@
-# 编译方式
 default:
-	cd build && bison -d ../src/parse.y 
 	cd build && flex ../src/lex.l
+	cd build && bison -d ../src/parse.y 
 	cd build && cc lex.yy.c parse.tab.c -ll -o zlang
-	# cd build && ./zlang
+	cd build && ./zlang ../example/1_var.z
+	cd build && rm zlang
