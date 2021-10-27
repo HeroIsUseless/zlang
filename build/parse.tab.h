@@ -39,21 +39,23 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     INTEGER = 258,
-     VARIABLE = 259,
-     VAR = 260,
-     INT = 261,
-     WHILE = 262,
-     ELSE = 263
+     NUMBER = 258,
+     ADD = 259,
+     SUB = 260,
+     MUL = 261,
+     DIV = 262,
+     ABS = 263,
+     EOL = 264
    };
 #endif
 /* Tokens.  */
-#define INTEGER 258
-#define VARIABLE 259
-#define VAR 260
-#define INT 261
-#define WHILE 262
-#define ELSE 263
+#define NUMBER 258
+#define ADD 259
+#define SUB 260
+#define MUL 261
+#define DIV 262
+#define ABS 263
+#define EOL 264
 
 
 

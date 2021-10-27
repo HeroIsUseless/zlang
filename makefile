@@ -1,6 +1,6 @@
 # 编译方式
 default:
-	flex src/lex.l
-	cc lex.yy.c -ll
-	./a.out
-	
+	cd build && bison -d ../src/parse.y 
+	cd build && flex ../src/lex.l
+	cd build && cc lex.yy.c parse.tab.c -ll
+	cd build && ./a.out
