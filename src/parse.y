@@ -14,7 +14,7 @@ union Type{
 	char String[20];
 	int Int;
 	char Char;
-}
+};
 /*一个声明，必须要有，这表明，当解析器得到 lexer 返回的token时，
 它可以认为全局变量 yylval 的名为 value 的成员已经在lex中被赋与了有意义的值。
 用它就不用define YYSTYPE了*/
@@ -26,6 +26,7 @@ union Type{
 }
 void yyerror(const char *s); // 它会在编译的时候使用，调试用
 extern int yylex(void);//该函数是在lex.yy.c里定义的，yyparse()里要调用该函数获取token
+int sym[26];
 %}
 /*越先定义优先级越低 */
 /*在表达式中如果有几个优先级相同的操作符，结合性就起仲裁的作用，由它决定哪个操作符先执行。*/
@@ -34,6 +35,9 @@ extern int yylex(void);//该函数是在lex.yy.c里定义的，yyparse()里要�
 /* token 声明终结符，同等优先级的操作符可以分成一组进行声明 */
 //%token      声明无结合性的语素类型
 /* type 声明非终结符 */
+%token    INTEGER VARIABLE
+%left    '+' '-'
+%left    '*' '/'
 %token <strval> VAR
 %token INT
 %token WHILE
@@ -52,8 +56,37 @@ extern int yylex(void);//该函数是在lex.yy.c里定义的，yyparse()里要�
 /*表示有else的话，就选择移进，而不是规约*/
 %nonassoc ELSE
 // %start指定文法的开始符号(非终结符)，既然是LALR文法，指定开始符号就是必要的，默认是第一个规则
-%start statement
+%start program
 %%
     /*语法规则部分*/
     /* 没有任何显式动作，将使用默认动作$$=$1 */
+program:
+    program statement '\n'
+    |
+    ;
+statement:
+     expr    {printf("%d\n", $1);}
+     |VARIABLE '=' expr    {sym[$1] = $3;}
+     ;
+expr:
+    INTEGER
+    |VARIABLE{$$ = sym[$1];}
+    |expr '+' expr    {$$ = $1 + $3;}
+    |expr '-' expr    {$$ = $1 - $3;}
+    |expr '*' expr    {$$ = $1 * $3;}
+    |expr '/' expr    {$$ = $1 / $3;}
+    |'('expr')'    {$$ = $2;}
+    ;
+%%
 
+void yyerror(char* s)
+{
+    fprintf(stderr, "%s\n", s);
+}
+
+int main(void)
+{
+    printf("A simple calculator.\n");
+    yyparse();
+    return 0;
+}
